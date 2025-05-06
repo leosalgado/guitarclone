@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://qv0m005gh13g"]
+
+[ext_resource type="PackedScene" uid="uid://cgbavfydj2fqr" path="res://fretboard.tscn" id="1_80nbo"]
+
+[node name="Game" type="Node3D"]
+
+[node name="Fretboard" parent="." instance=ExtResource("1_80nbo")]
+
+[node name="Camera3D" type="Camera3D" parent="Fretboard"]
+transform = Transform3D(1, 0, 0, 0, 0.829272, 0.558846, 0, -0.558846, 0.829272, 0, 2.09394, 1.06104)
+current = true
+
+[node name="CameraDebug" type="Camera3D" parent="Fretboard"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 11.7031, -8.16959)

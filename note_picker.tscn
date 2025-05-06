@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bde8qya3mpde5"]
+
+[ext_resource type="Script" uid="uid://3j12no6um316" path="res://note_picker.gd" id="1_dilv8"]
+[ext_resource type="Material" uid="uid://i52qb51bdhef" path="res://yellow_mat.tres" id="2_p67mv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cc07b"]
+material = ExtResource("2_p67mv")
+
+[node name="NotePicker" type="Node3D"]
+script = ExtResource("1_dilv8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_cc07b")
