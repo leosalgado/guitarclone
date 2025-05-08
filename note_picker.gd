@@ -15,9 +15,9 @@ func _ready():
 func set_material():
 	match line:
 		1:
-			$MeshInstance3D.material_override = green_mat
-		2:
 			$MeshInstance3D.material_override = red_mat
+		2:
+			$MeshInstance3D.material_override = green_mat
 		3:
 			$MeshInstance3D.material_override = yellow_mat
 

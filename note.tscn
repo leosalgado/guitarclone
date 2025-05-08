@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpkt8etfwcwx0"]
+
+[ext_resource type="Script" uid="uid://dqllyhyyewbpo" path="res://note.gd" id="1_doocs"]
+[ext_resource type="Material" uid="uid://3mev6ytsh5x6" path="res://green_mat.tres" id="2_wn01w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rf3o7"]
+material = ExtResource("2_wn01w")
+
+[node name="Note" type="Node3D"]
+script = ExtResource("1_doocs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_rf3o7")
