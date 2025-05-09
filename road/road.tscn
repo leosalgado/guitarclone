@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjlctw1ko1g7e"]
+
+[ext_resource type="Script" uid="uid://cmhn2kx53i8sf" path="res://road/road.gd" id="1"]
+[ext_resource type="PackedScene" path="res://picker/note_picker.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bihkfxybh85tj" path="res://road/road_surface.tscn" id="3"]
+
+[sub_resource type="PlaneMesh" id="1"]
+
+[node name="Road" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006, 0.49)
+mesh = SubResource("1")
+
+[node name="Line1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, 1, 0, 0, 0, 16, -0.015, 0.006, -16.5)
+mesh = SubResource("1")
+
+[node name="Line2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, 1, 0, 0, 0, 16, -1.015, 0.006, -16.5)
+mesh = SubResource("1")
+
+[node name="Line3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, 1, 0, 0, 0, 16, 0.985, 0.006, -16.5)
+mesh = SubResource("1")
+
+[node name="NotePicker" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="NotePicker2" parent="." instance=ExtResource("2")]
+line = 2
+
+[node name="NotePicker3" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+line = 3
+
+[node name="BarsNode" type="Node3D" parent="."]
+
+[node name="RoadSurface" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
+
+[node name="RoadSurface2" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.5)

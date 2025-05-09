@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=4 uid="uid://bihkfxybh85tj"]
+
+[sub_resource type="ArrayMesh" id="10"]
+resource_name = "Plane"
+_surfaces = [{
+"aabb": AABB(-2, 0, -4, 4.00001, 1e-05, 8.00001),
+"attribute_data": PackedByteArray("AOB/PwDg/z4AQJQ4AOB/PwDgfz8A4H8/AGCUOADg/z4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAACAAEAAAABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAQAAAAAAAAIBAAAAAwAAAAAAAAIDAAAAAwAAAAAAAAIBAAAAAQAAAAAAAAIDA/3//v2EAAAD/f/+/YQAAAP9//7//O/87/3//vwAAAAA=")
+}]
+
+[node name="RoadSurface" type="Node3D"]
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("10")

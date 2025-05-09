@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="guitarclone"
-run/main_scene="uid://qv0m005gh13g"
-config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="res://game.tscn"
+config/features=PackedStringArray("4.4")
+config/icon="res://icon.png"
+
+[rendering]
+
+environment/defaults/default_environment="res://default_env.tres"
