@@ -24,12 +24,18 @@ func _ready():
 	music_node.setup(self)
 	road_node.setup(self)
 	
-func _process(delta):
-	if not game_started:
-		if Input.is_action_just_pressed("ui_accept"):  # To start
-			game_started = true
-			music_node.start()
-			road_node.start()
+#func _process(delta):
+	#if not game_started:
+		#return
+		#if Input.is_action_just_pressed("ui_accept"):  # To start
+			#game_started = true
+			#music_node.start()
+			#road_node.start()
+
+func game_start():
+	game_started = true
+	music_node.start()
+	road_node.start()
 
 func calc_params():
 	tempo = int(map.tempo)
