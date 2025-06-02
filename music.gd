@@ -21,13 +21,13 @@ func setup(game):
 	
 func start():
 	started = true
+	await get_tree().create_timer(2.5).timeout
 	player.play(start_pos_in_sec)
 	anim.play("sound_on")
 	
 func _process(delta):
 	if not started:
-		pre_start_duration -= speed*delta
-		if pre_start_duration <= 0:
-			start()
-			return
-
+		#pre_start_duration -= speed*delta
+		#if pre_start_duration <= 0:
+			#start()
+		return

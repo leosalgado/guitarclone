@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxapuxfts2wo2" path="res://game.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cjlctw1ko1g7e" path="res://road/road.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://music.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dtorq2fcay8m1" path="res://music.tscn" id="3"]
 
 [sub_resource type="Environment" id="1"]
 ambient_light_color = Color(0.776471, 0.776471, 0.776471, 1)

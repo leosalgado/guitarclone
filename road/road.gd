@@ -12,8 +12,10 @@ var surface_speed
 
 var curr_bar_index
 var tracks_data 
+var started
 
 func setup(game):
+	started = false
 	speed = Vector3(0,0,game.speed)
 	bar_length_in_m = game.bar_length_in_m
 	curr_location = Vector3(0,0,-bar_length_in_m)
@@ -26,6 +28,9 @@ func setup(game):
 	
 		
 func _process(delta):
+	if not started:
+		return
+	
 	bars_node.translate(speed*delta)
 	
 	for bar in bars:
@@ -33,6 +38,8 @@ func _process(delta):
 			remove_bar(bar)
 			add_bar()
 		
+func start():
+	started = true
 
 func add_bar():	
 	var bar = bar_scn.instantiate()
