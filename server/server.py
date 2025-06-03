@@ -1,0 +1,49 @@
+import socket
+import threading
+
+clients = []
+ready_count = 0
+lock = threading.Lock()
+
+
+def handle_client(conn):
+    global ready_count
+    while True:
+        data = conn.recv(1024).decode()
+        if not data:
+            break
+        if data.strip() == "ready":
+            with lock:
+                ready_count += 1
+                print(f"Jogador pronto ({ready_count}/{len(clients)})")
+                if ready_count == len(clients):
+                    for c in clients:
+                        c.sendall(b"start\n")
+                    print("Start!")
+    conn.close()
+    with lock:
+        if conn in clients:
+            clients.remove(conn)
+            # Ajusta o ready_count se um cliente sair antes de dar ready
+            if ready_count > len(clients):
+                ready_count = len(clients)
+
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("0.0.0.0", 9000))
+server.listen()
+
+print("Servidor aguardando conexões...")
+
+while True:
+    conn, addr = server.accept()
+    print(f"Conectado com {addr}")
+
+    ip, port = addr
+    client_id = f"{ip}:{port}\n"
+
+    conn.sendall(client_id.encode())
+
+    with lock:
+        clients.append(conn)
+    threading.Thread(target=handle_client, args=(conn,), daemon=True).start()
