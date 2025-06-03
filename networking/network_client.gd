@@ -5,6 +5,8 @@ var connected = false
 var ready_sent = false
 var game_started = false
 
+var client_id := ""
+
 @onready var game = get_parent()
 
 func _ready():
@@ -47,3 +49,6 @@ func _process(delta):
 		if msg == "start" and not game_started:
 			game.game_start()
 			#game_started = true
+		elif ":" in msg and client_id == "":
+			client_id = msg
+			print("client_id:", client_id)

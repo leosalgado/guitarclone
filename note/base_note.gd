@@ -60,7 +60,6 @@ func collect():
 	collected = true
 	picker.on_collect()
 	Score.add_points(10)
-	print(Score.points)
 	hide()
 
 func _on_area_entered(area):
