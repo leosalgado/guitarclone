@@ -3,6 +3,11 @@ extends Node3D
 @onready var music_node = $Music
 @onready var road_node = $Road
 
+@onready var score_label = $CanvasLayer/ScoreLabel
+
+func _process(delta):
+	score_label.text = "Score: %d" % Score.points
+
 var audio
 var map
 var audio_file = "res://audio.ogg"
