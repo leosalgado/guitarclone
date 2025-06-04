@@ -6,12 +6,14 @@ ready_count = 0
 lock = threading.Lock()
 
 
-def handle_client(conn):
+def handle_client(conn, addr):
     global ready_count
     while True:
         data = conn.recv(1024).decode()
         if not data:
+            print(f"Conexão encerrada pelo cliente {addr}.")
             break
+        print(f"Recebido: {repr(data)}")
         if data.strip() == "ready":
             with lock:
                 ready_count += 1
@@ -20,6 +22,8 @@ def handle_client(conn):
                     for c in clients:
                         c.sendall(b"start\n")
                     print("Start!")
+        elif data.strip().startswith("score:"):
+            print(data.strip())
     conn.close()
     with lock:
         if conn in clients:
@@ -46,4 +50,4 @@ while True:
 
     with lock:
         clients.append(conn)
-    threading.Thread(target=handle_client, args=(conn,), daemon=True).start()
+    threading.Thread(target=handle_client, args=(conn, addr), daemon=True).start()
