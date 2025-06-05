@@ -1,9 +1,11 @@
 import socket
 import threading
+import json
 
 clients = []
 ready_count = 0
 lock = threading.Lock()
+scores = {}
 
 
 def handle_client(conn, addr):
@@ -13,7 +15,7 @@ def handle_client(conn, addr):
         if not data:
             print(f"Conexão encerrada pelo cliente {addr}.")
             break
-        print(f"Recebido: {repr(data)}")
+        # print(f"Recebido: {repr(data)}")
         if data.strip() == "ready":
             with lock:
                 ready_count += 1
@@ -22,12 +24,35 @@ def handle_client(conn, addr):
                     for c in clients:
                         c.sendall(b"start\n")
                     print("Start!")
-        elif data.strip().startswith("score:"):
-            print(data.strip())
+        elif "," in data.strip():
+            # print(data.strip())
+            parts = data.split(",")
+            if len(parts) == 2:
+                client_id = parts[0].strip()
+                score_str = parts[1].strip()
+                if score_str.isdigit():
+                    with lock:
+                        scores[client_id] = int(score_str)
+                        print(scores)
+                        data = json.dumps(scores) + "\n"
+                        for c in clients:
+                            try:
+                                c.sendall(data.encode())
+                            except:
+                                pass
+                        # print(f"Score de {client_id}: {score_str}")
+                else:
+                    print(f"Score inválido: {score_str}")
+            else:
+                print("Formato inválido:", data)
     conn.close()
     with lock:
         if conn in clients:
             clients.remove(conn)
+            remove_client_id = f"{addr[0]}:{addr[1]}"
+            if remove_client_id in scores:
+                del scores[remove_client_id]
+                print(f"Score de {remove_client_id} removido.")
             # Ajusta o ready_count se um cliente sair antes de dar ready
             if ready_count > len(clients):
                 ready_count = len(clients)

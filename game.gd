@@ -4,9 +4,16 @@ extends Node3D
 @onready var road_node = $Road
 
 @onready var score_label = $CanvasLayer/ScoreLabel
+@onready var network_client = $Network
 
 func _process(delta):
-	score_label.text = "Score: %d" % Score.points
+	#score_label.text = "Score: %d" % Score.points
+	#score_label.text = "Score:" + str(network_client.scores)
+	var text := "Scores:\n"
+	for id in network_client.scores.keys():
+		text += "- " + id + " -> " + str(network_client.scores[id]) + "\n"
+
+	score_label.text = text
 
 var audio
 var map
@@ -50,15 +57,6 @@ func calc_params():
 	note_scale = bar_length_in_m/float(4*400)
 	start_pos_in_sec = (float(map.start_pos)/400.0) * quarter_time_in_sec
 	
-#func load_map():
-	#var file = File.new()
-	#file.open(map_file, File.READ)
-	#var content = file.get_as_text()
-	#file.close()
-	#var test_json_conv = JSON.new()
-	#test_json_conv.parse(content).get_data()
-	#return test_json_conv.get_data()
-	#
 func load_map():
 	var file = FileAccess.open(map_file, FileAccess.READ)
 	if file == null:

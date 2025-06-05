@@ -4,6 +4,7 @@ var client := StreamPeerTCP.new()
 var connected = false
 var ready_sent = false
 var game_started = false
+var scores = {}
 
 var client_id := ""
 
@@ -42,7 +43,14 @@ func _process(delta):
 			elif ":" in msg and client_id == "":
 				client_id = msg
 				print("client_id:", client_id)
-		
+			elif msg.begins_with("{"):
+				var json = JSON.new()
+				var json_result = json.parse(msg)
+				if json_result == OK:
+					scores = json.data
+					print("Scores recebidos do servidor:", scores)
+				else:
+					print("Erro ao fazer parse do JSON:", json_result.error_string)
 		
 		broadcast_timer += delta
 		if broadcast_timer >= broadcast_interval:
@@ -51,5 +59,5 @@ func _process(delta):
 
 func broadcast_score_to_clients():
 	var score = Score.points  # Score.gd é singleton, pode acessar direto
-	print(score)
+	#print(score)
 	client.put_data((client_id + "," + str(score)).to_utf8_buffer())
